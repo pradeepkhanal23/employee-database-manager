@@ -1,0 +1,26 @@
+{
+  "name": "employee-database-manager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pradeepkhanal23/employee-database-manager.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pradeepkhanal23/employee-database-manager/issues"
+  },
+  "homepage": "https://github.com/pradeepkhanal23/employee-database-manager#readme",
+  "dependencies": {
+    "express": "^4.19.2",
+    "inquirer": "8.2.4",
+    "pg": "^8.11.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
