@@ -1,11 +1,11 @@
 -- Departments table
-CREATE TABLE departments(
+CREATE TABLE IF NOT EXISTS departments(
     id SERIAL PRIMARY KEY,
     name VARCHAR(30) UNIQUE NOT NULL
 );
 
 -- roles table
-CREATE TABLE roles(
+CREATE TABLE IF NOT EXISTS roles(
     id SERIAL PRIMARY KEY,
     title VARCHAR(30) UNIQUE NOT NULL,
     salary DECIMAL NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE roles(
     ON DELETE SET NULL);
 
 -- emplopyee table
-CREATE TABLE employees(
+CREATE TABLE IF NOT EXISTS employees(
     id SERIAL PRIMARY KEY,
     first_name VARCHAR(30) UNIQUE NOT NULL,
     last_name VARCHAR(30) UNIQUE NOT NULL,

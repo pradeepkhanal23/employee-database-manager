@@ -20,7 +20,7 @@ const questions = [
 
 function cli() {
   inquirer.prompt(questions).then((answers) => {
-    console.log(answers);
+    console.log(answers.choice);
   });
 }
 
