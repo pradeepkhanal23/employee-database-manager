@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "dev": "nodemon index.js -w -I --no-stdin"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pradeepkhanal23/employee-database-manager.git"
@@ -17,6 +19,7 @@
   "homepage": "https://github.com/pradeepkhanal23/employee-database-manager#readme",
   "dependencies": {
     "express": "^4.19.2",
+    "figlet": "^1.7.0",
     "inquirer": "8.2.4",
     "pg": "^8.11.5"
   },
