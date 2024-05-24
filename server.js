@@ -6,12 +6,15 @@ const app = express();
 const apiRouter = require("./routes/index.js");
 //importing connection file from config folder
 const { connectDB } = require("./config/connection.js");
+const seedDatabase = require("./utils/seedDatabase.js");
 
 // setting the port number for the server to listen on
 const PORT = 3000;
 
 //connecting to the DB
 connectDB();
+
+seedDatabase();
 
 //api will handle the api request
 app.use("/api", apiRouter);
