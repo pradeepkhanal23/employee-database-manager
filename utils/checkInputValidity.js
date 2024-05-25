@@ -1,6 +1,6 @@
-function checkInputValidity(input) {
+function checkInputValidityString(input) {
   if (!input) {
-    console.error("\nPlease enter the department name!");
+    console.error("\nPlease enter value to proceed");
     return false;
   } else if (!isNaN(input)) {
     console.error("\nPlease enter a string value!");
@@ -10,4 +10,17 @@ function checkInputValidity(input) {
   }
 }
 
-module.exports = checkInputValidity;
+function checkInputValidityNumber(input) {
+  if (!input) {
+    console.error("\nPlease enter value to proceed");
+    return false;
+  }
+  if (!isNaN(input)) {
+    return true;
+  }
+}
+
+module.exports = {
+  checkInputValidityString,
+  checkInputValidityNumber,
+};

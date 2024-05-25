@@ -13,14 +13,11 @@ async function runQuery(query, values = "", database = "project_db") {
 
   try {
     const response = await client.query(query, values);
-
-    if (values === "") {
-      console.table(response.rows);
-    }
-    client.release();
+    return response.rows;
   } catch (error) {
     console.log("Error running the query", error);
   } finally {
+    client.release();
     await pool.end();
   }
 }
