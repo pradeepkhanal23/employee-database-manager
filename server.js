@@ -4,20 +4,22 @@ const express = require("express");
 const app = express();
 //modular api router
 const apiRouter = require("./routes/index.js");
-//importing connection file from config folder
-const { connectDB } = require("./config/connection.js");
-const seedDatabase = require("./utils/seedDatabase.js");
+const seedDatabase = require("./config/connection.js");
+const cli = require("./utils/inquirer.js");
+const showFiglet = require("./utils/figlet.js");
 
 // setting the port number for the server to listen on
 const PORT = 3000;
 
-//connecting to the DB
-connectDB();
-
-seedDatabase();
-
 //api will handle the api request
 app.use("/api", apiRouter);
+
+// connecting to the database and seeding it with dummy values to begin with
+//also trigerring the cli after the seeding is done to prevent the event loop getting blocked and running synchronously
+seedDatabase().then(() => {
+  showFiglet();
+  cli();
+});
 
 app.listen(PORT, () => {
   console.log(`Server is listening on ${PORT}`);
