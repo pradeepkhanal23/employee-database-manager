@@ -1,5 +1,6 @@
 const inquirer = require("inquirer");
 const runQuery = require("../db/query");
+const checkInputValidity = require("../utils/checkInputValidity");
 
 const questions = [
   {
@@ -49,15 +50,16 @@ async function selectQuery(query) {
       break;
 
     case "Add a department":
-      const department = await inquirer.prompt({
+      let { department } = await inquirer.prompt({
         type: "input",
-        name: "name",
+        name: "department",
         message: "Enter the department name:",
+        validate: checkInputValidity,
       });
 
       try {
         await runQuery("insert into departments (name) VALUES ($1)", [
-          department.name,
+          department,
         ]);
         console.log("Department added successfully");
       } catch (error) {
@@ -76,6 +78,7 @@ async function selectQuery(query) {
       console.log("updated an employee role selected");
       break;
     case "Quit":
+      process.exit(0);
       break;
     default:
       console.log("invalid choice");
