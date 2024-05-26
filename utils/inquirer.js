@@ -179,7 +179,7 @@ async function selectQuery(query) {
             employeeQuestion.firstname,
             employeeQuestion.lastname,
             selectedRole.id,
-            selectedManager.id,
+            selectedManager?.id || null,
           ]
         );
         console.log(
