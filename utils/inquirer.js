@@ -117,17 +117,85 @@ async function selectQuery(query) {
         console.error("Error adding the role", error);
       }
       cli();
+      break;
 
-      break;
     case "Add an employee":
-      console.log("add an employee selected");
+      const roles = await runQuery("select * from roles");
+
+      const rolesArray = roles.map((role) => {
+        return role.title;
+      });
+
+      const employees = await runQuery("select * from employees");
+
+      const managersArray = employees.map((employee) => {
+        return `${employee.first_name} ${employee.last_name}`;
+      });
+
+      const employeeQuestion = await inquirer.prompt([
+        {
+          type: "input",
+          name: "firstname",
+          message: "What is the employee's first name?",
+          validate: checkInputValidityString,
+        },
+        {
+          type: "input",
+          name: "lastname",
+          message: "What is the employee's last name?",
+          validate: checkInputValidityString,
+        },
+        {
+          type: "list",
+          name: "employee_role",
+          message: "What is the employee's role?",
+          choices: rolesArray,
+          validate: checkInputValidityString,
+        },
+        {
+          type: "list",
+          name: "manager",
+          message: "Who is the employee's manager?",
+          choices: [...managersArray, "None"],
+          validate: checkInputValidityString,
+        },
+      ]);
+
+      const selectedRole = roles.find((role) => {
+        return role.title === employeeQuestion.employee_role;
+      });
+
+      const selectedManager = employees.find((employee) => {
+        return (
+          `${employee.first_name} ${employee.last_name}` ===
+          employeeQuestion.manager
+        );
+      });
+
+      try {
+        await runQuery(
+          "insert into employees (first_name, last_name, role_id, manager_id) VALUES ($1, $2, $3, $4)",
+          [
+            employeeQuestion.firstname,
+            employeeQuestion.lastname,
+            selectedRole.id,
+            selectedManager.id,
+          ]
+        );
+        console.log(
+          `${employeeQuestion.firstname} ${employeeQuestion.lastname} added to the employees database`
+        );
+      } catch (error) {
+        console.error("Error adding the employee", error);
+      }
+      cli();
       break;
+
     case "Update an employee role":
       console.log("updated an employee role selected");
       break;
     case "Quit":
       process.exit(0);
-      break;
     default:
       console.log("invalid choice");
       break;
