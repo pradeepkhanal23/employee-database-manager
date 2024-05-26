@@ -192,8 +192,78 @@ async function selectQuery(query) {
       break;
 
     case "Update an employee role":
-      console.log("updated an employee role selected");
+      const allStaffs = await runQuery("select * from employees");
+      const rolesOfStaffs = await runQuery("select * from roles");
+
+      const rolesOfStaffsArray = rolesOfStaffs.map((role) => {
+        return role.title;
+      });
+
+      const staffArray = allStaffs.map((staff) => {
+        return `${staff.first_name} ${staff.last_name}`;
+      });
+
+      const updateEmployeeQuestions = await inquirer.prompt([
+        {
+          type: "list",
+          name: "employee",
+          message: "Which employee's role you want to update?",
+          choices: staffArray,
+          validate: checkInputValidityString,
+        },
+        {
+          type: "list",
+          name: "role",
+          message: "Which role you want to assign the selected employee?",
+          choices: rolesOfStaffsArray,
+          validate: checkInputValidityString,
+        },
+        {
+          type: "list",
+          name: "manager",
+          message:
+            "Who is the manager for the updated role of the selected employee?",
+          choices: [...staffArray, "None"],
+          validate: checkInputValidityString,
+        },
+      ]);
+
+      const employeeToUpdate = allStaffs.find((staff) => {
+        return (
+          `${staff.first_name} ${staff.last_name}` ===
+          updateEmployeeQuestions.employee
+        );
+      });
+
+      const newRole = rolesOfStaffs.find(
+        (role) => role.title === updateEmployeeQuestions.role
+      );
+
+      const selectedManagerForUpdatedEmployee = allStaffs.find(
+        (staff) =>
+          `${staff.first_name} ${staff.last_name}` ===
+          updateEmployeeQuestions.manager
+      );
+
+      const managerId = selectedManagerForUpdatedEmployee
+        ? selectedManagerForUpdatedEmployee.id
+        : null;
+
+      try {
+        await runQuery(
+          "UPDATE employees SET role_id = $1, manager_id = $2 WHERE id = $3",
+          [newRole.id, managerId, employeeToUpdate.id]
+        );
+        console.log(
+          `${employeeToUpdate.first_name} ${employeeToUpdate.last_name}'s role has been updated to ${newRole.title}`
+        );
+      } catch (error) {
+        console.error("Error updating the employee's role", error);
+      }
+
+      cli();
       break;
+
     case "Quit":
       process.exit(0);
     default:
