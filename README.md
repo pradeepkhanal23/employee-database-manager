@@ -49,7 +49,6 @@ Click on the image below for full project demo that explains the functionality o
 
 <a href="https://www.youtube.com/watch?v=TyvEd4A6Cvg&ab_channel=PradeepKhanal" target="_blank" rel="noreferrer noopener" style="position: relative; display: inline-block;">
   <img src="./assets/employee-database.png" alt="Project Demo Video" style="width: 100%; max-width: 600px;">
-  <button style="position: absolute; top:50%; left:50%;">Click to View</button>
 </a>
 
 ## Features
