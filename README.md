@@ -47,8 +47,9 @@ Here is the database schema that this project follows:
 
 Full project demo that explains the functionality of the application is here:
 
-<a href="https://www.youtube.com/watch?v=TyvEd4A6Cvg&ab_channel=PradeepKhanal" target="_blank">
-  <img src="./assets/employee-database.png" alt="Project Demo Video">
+<a href="https://www.youtube.com/watch?v=TyvEd4A6Cvg&ab_channel=PradeepKhanal" target="_blank" rel="noreferrer noopener" style="position: relative; display: inline-block;">
+  <img src="./assets/employee-database.png" alt="Project Demo Video" style="width: 100%; max-width: 600px;">
+  <img src="https://img.icons8.com/color/48/000000/play-button-circled.png" alt="Play Video" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
 </a>
 
 ## Features
