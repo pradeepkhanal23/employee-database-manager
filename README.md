@@ -45,6 +45,8 @@ Here is the database schema that this project follows:
 
 ## Video Demo
 
+Full project demo that explains the functionality of the application is here:
+
 [![Project Demo Video](./assets/employee-database.png)](https://www.youtube.com/watch?v=TyvEd4A6Cvg&ab_channel=PradeepKhanal)
 
 ## Features
